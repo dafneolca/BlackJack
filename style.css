@@ -1,0 +1,85 @@
+*{
+  border: solid black 1px;
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+html, body {
+ width:  100%;
+ height: 100%;
+ padding: 0px;
+ margin: 0px;
+ overflow: hidden;
+}
+
+h1, p {
+  font-family: 'Playfair Display', serif;
+
+}
+
+img {
+  width: 10%;
+}
+
+#main {
+  padding: 5%;
+}
+
+
+.displayed-cards {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+
+#introduction {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Playfair Display', serif;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  padding: 10%;
+  font-family: 'Playfair Display', serif;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+#player-status{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 5%;
+
+}
+
+.button button {
+  font-family: 'Playfair Display', serif;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 2%;
+  font-size: 10  pt;
+  word-wrap: normal;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  color: #29293b;
+  background: #ffffff;
+  border: solid #000000 1px;
+}
+
+.button button:hover {
+  background: #d4d4d4;
+  text-decoration: none;
+}

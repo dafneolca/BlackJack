@@ -18,8 +18,9 @@ html, body {
  overflow: hidden;
 }
 
-h1, p {
+#introduction  {
   font-family: 'Playfair Display', serif;
+  font-size: 100px;
 
 }
 
@@ -49,7 +50,7 @@ img {
   font-family: 'Playfair Display', serif;
 }
 
-.button {
+#start-button {
   display: flex;
   justify-content: center;
   padding: 10%;
@@ -65,7 +66,7 @@ img {
 
 }
 
-.button button {
+#start-button {
   font-family: 'Playfair Display', serif;
   font-family: 'Josefin Sans', sans-serif;
   padding: 2%;
@@ -79,7 +80,7 @@ img {
   border: solid #000000 1px;
 }
 
-.button button:hover {
+#start-button:hover {
   background: #d4d4d4;
   text-decoration: none;
 }

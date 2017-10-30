@@ -1,5 +1,18 @@
-var element = document.getElementById('introduction');
-element.innerHTML="Im NOT a cat";
+
+
+var introText = document.getElementById('introduction');
+introText.innerHTML="Blackjack";
+
+var startButton=document.getElementById('start-button');
+
+
+startButton.onclick = function () {
+  //var introHeader=document.getElementById('start-button');
+  introText.removeAttribute('Id');
+  console.log('are you SURE??');
+};
+
+
 
 
 

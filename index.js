@@ -1,45 +1,83 @@
+function BlackJack(mainContainerElement) {
+  var self = this;
+  self.startscreen = null;
+  self.gameboard = null;
+  self.mainContainer = mainContainerElement;
 
-
-var introText = document.getElementById('introduction');
-introText.innerHTML="Blackjack";
-
-var startButton=document.getElementById('start-button');
-
-
-startButton.onclick = function () {
-  //var introHeader=document.getElementById('start-button');
-  introText.removeAttribute('Id');
-  console.log('are you SURE??');
-};
-
-
+  self.cards = {
+    hearts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
+    spades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
+    diamonds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
+    clubs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  };
+  self.money = 100;
 
 
 
-function BlackJack () {
+  self.buildStartScreen = function() {
+    var title = document.createElement("h1");
+    title.innerText = "Welcome to BlackJack";
+    self.mainContainer.appendChild(title);
+    var startButton = document.createElement("button");
+    startButton.innerText = "Start Game!";
+    startButton.setAttribute("id", "start-button");
+    startButton.addEventListener("click", self.buildGameScreen);
+    self.mainContainer.appendChild(startButton);
+  };
 
+  self.destroyStartScreen = function() {
+    self.mainContainer.remove(); // WORK
+  };
+
+  self.buildGameScreen = function() {
+    self.destroyStartScreen(); /// WORKS
+
+
+    // CREATE DEALERS CARDS HEADING ->    WORKS
+    var topContainer = document.createElement("containerBox");
+    var dealerCardsText = document.createElement("h1");
+    dealerCardsText.innerText = "Dealer's Cards";
+    topContainer.appendChild(dealerCardsText);
+    var bodyTag = document.getElementsByTagName("body");
+    bodyTag[0].appendChild(topContainer);
+
+
+    // CREATE DEALERS CARDS HEADING
+    var bottomContainer = document.createElement("containerBox");
+    var playerCardText = document.createElement("h1");
+    playerCardText.innerText = "Player's Cards";
+    bottomContainer.appendChild(playerCardText);
+    console.log(playerCardText);
+    bodyTag[1].appendChild(bottomContainer);
+
+
+
+  };
+
+
+
+
+
+
+
+
+
+  shuffleCard = function() {
+    var counter = this.cards.length;
+    while (counter > 0) {
+      var index = Math.floor(Math.random() * counter);
+      counter -= 1;
+      var temp = this.cards[counter];
+      this.cards[counter] = this.cards[index];
+      this.cards[index] = temp;
+    }
+  };
 }
 
 
-var cards = {
-  hearts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
-  spades: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
-  diamonds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
-  clubs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-};
 
-var money = 100;
 
-BlackJack.prototype.shuffleCard = function() {
-  let counter = this.cards.length;
-  while (counter > 0) {
-    const index = Math.floor(Math.random() * counter);
-    counter -= 1;
-    const temp = this.cards[counter];
-    this.cards[counter] = this.cards[index];
-    this.cards[index] = temp;
-  }
-};
+
 //var moneyOnBet= userInput;
 
 //onclick method to start new game, build blackjack NEW game

@@ -9,6 +9,9 @@ function BlackJack(mainContainerElement) {
   self.dealersCardsDiv = null;
   self.playersCardsDiv = null;
   self.backCard = null;
+  self.dealerSum = 0;
+  self.playerSum = 0;
+  self.playerCardArray = [];
   self.cards = [
     // 2
     {
@@ -22,16 +25,38 @@ function BlackJack(mainContainerElement) {
       value: 2
     },
     {
-      name: "2 of hearts",
-      img: "card_images/2_of_clubs.png",
+      name: "2 of spades",
+      img: "card_images/2_of_spades.png",
       value: 2
     },
     {
       name: "2 of hearts",
       img: "card_images/2_of_hearts.png",
       value: 2
+    }, // 3
+    {
+      name: "3 of clubs",
+      img: "card_images/3_of_clubs.png",
+      value: 3
+    },
+    {
+      name: "3 of diamonds",
+      img: "card_images/3_of_diamonds.png",
+      value: 3
+    },
+    {
+      name: "3 of hearts",
+      img: "card_images/3_of_hearts.png",
+      value: 3
+    },
+    {
+      name: "3 of spades",
+      img: "card_images/3_of_spades.png",
+      value: 3
     },
   ];
+
+
 
   self.buildStartScreen = function() {
     var title = document.createElement("h1");
@@ -96,9 +121,16 @@ function BlackJack(mainContainerElement) {
     standButton.addEventListener("click", self.stand);
     bodyTag[0].appendChild(standButton);
 
-    //FOOTER WITH SCORE
+    //FOOTER WITH GAME STATUS
     self.footerDiv = document.createElement("div");
     self.footerDiv.setAttribute("id", "footer-div");
+    var currentBalance = document.createElement("p");
+    currentBalance.innerText = "Your current balance is: #" + "You bet: #";
+    self.footerDiv.appendChild(currentBalance);
+
+
+    //FOOTER WITH SCORE
+
     var scoreInfo = document.createElement("p");
     scoreInfo.innerText = "You have #. Hit or Stand?";
     self.footerDiv.appendChild(scoreInfo);
@@ -107,29 +139,92 @@ function BlackJack(mainContainerElement) {
 
 
   ////////////      METHODS      ////////////
+
+  // SHUFFLE CARDS FUNCTION
+  /*self.shuffleCards = function() {
+    var j = 0;
+    var temp = null;
+    for (var i = 52; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = self.cards[i];
+      self.cards[i] = self.cards[j];
+      self.cards[j] = temp;
+    }
+    return self.cardsShuffled;
+  };
+*/
+
+  /*
+  name: "2 of clubs",
+  img: "card_images/2_of_clubs.png",
+  value: 2
+  */
+
   //NEW GAME FUNCTION
   self.newGame = function() {
+
+
+    console.log("cardsShuffled");
+
     var dealerCard = document.createElement("img");
     var playerCard = document.createElement("img");
     var dealerCard2 = document.createElement("img");
     var playerCard2 = document.createElement("img");
-    dealerCard.src = "card_images/back.png";
-    playerCard.src = "card_images/back.png";
-    dealerCard2.src = "card_images/back.png";
-    playerCard2.src = "card_images/back.png";
+
+    //  for (var i = 0; i < 2; i++) {
+    console.log("heres the loop");
+    var cardDealer = self.cards.pop();
+    var cardDealer2 = self.cards.pop();
+    dealerCard.src = cardDealer.img; // dealerCard.style.display = "none";
+    dealerCard2.src = cardDealer.img;
+
+    self.dealerSum += cardDealer.value + cardDealer2;
+
+    //create new div
     self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
-    self.playersCardsDiv.appendChild(playerCard); //PLAYERS CARDS
-    self.dealersCardsDiv.appendChild(dealerCard2); //DEALERS CARDS
-    self.playersCardsDiv.appendChild(playerCard2); //PLAYERS CARDS
-    document.getElementById("newGameButton").disabled = true;
+    self.dealersCardsDiv.appendChild(dealerCard2);
+
+    //  }
+    console.log(self.dealerSum);
+    // dealerCard.src = self.cards[Math.floor(Math.random() * self.cards.length)].img;
+    // playerCard.src = self.cards[Math.floor(Math.random() * self.cards.length)].img;
+    // dealerCard2.src = "card_images/back.png";
+    // playerCard2.src = "card_images/back.png";
+    // self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
+    // self.playersCardsDiv.appendChild(playerCard); //PLAYERS CARDS
+    // self.dealersCardsDiv.appendChild(dealerCard2); //DEALERS CARDS
+    // self.playersCardsDiv.appendChild(playerCard2); //PLAYERS CARDS
+    // document.getElementById("newGameButton").disabled = true;
 
     //CREATE FOOTER
 
   };
 
 
-  //HIT FUNCTION
+  /*HIT FUNCTION
+  Adds 1 new card (from cards array) to "YOUR CARDS".
+  IF: your cards sum up to 21 call function "YOU WIN" && your cards sum > dealers sum
+  IF: your cards sum up to over 21 call function "YOU LOSE"
+  IF: cards sum <21 || cards.length <=5 -> YOU WIN
+  */
+
+
   self.hit = function() {
+    var dealerCard = document.createElement("img");
+    var playerCard = document.createElement("img");
+
+    var cardDealer = self.cards.pop();
+    var cardPlayer = self.cards.pop();
+
+    dealerCard.src = cardDealer.img; // dealerCard.style.display = "none";
+    dealerCard2.src = cardDealer.img;
+
+    self.dealerSum += cardDealer.value + cardDealer2;
+
+    //create new div
+    self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
+    self.dealersCardsDiv.appendChild(dealerCard2);
+
     var newPlayerCard = document.createElement("img");
     newPlayerCard.src = "card_images/back.png";
     self.playersCardsDiv.appendChild(newPlayerCard); //PLAYERS CARDS
@@ -144,65 +239,7 @@ function BlackJack(mainContainerElement) {
 
   };
 
-  //RANDOM CARD GENERATOR FUNCTION
-  self.randomCardGenerator = function() {
-    var randomCard = Math.floor(Math.random() * self.cards.length);
-    console.log(self.cards[randomCard].name);
-  };
 
-  //CARD SHUFFLE FUNCTION
-  /*  self.shuffleCard = function() {
-      let counter = self.cards.length;
-      while (counter > 0) {
-        var ix = Math.floor(Math.random() * counter);
-        counter -= 1;
-        var temp = self.cards[counter];
-        self.cards[counter] = self.cards[index];
-        self.cards[index] = temp;
-      }
-    }; */
 
 
 }
-
-
-
-
-//var moneyOnBet= userInput;
-
-
-
-/*FUNCTION Hit:
-Adds 1 new card to "YOUR CARDS".
-IF: your cards sum up to 21 call function "YOU WIN"
-IF: your cards sum up to over 21 call function "YOU LOSE"
-*/
-
-/*FUNCTION Stand:
-Reveals all cards of dealer
-Adds a new card to DEALER until sum >=21
-Compares the sum of dealers cards and players cards.
-IF SUM OF PLAYERSCARDS > SUM OF dearlercards AND <=21 ->
-              call function "YOU WIN"
-            + Call function "MONEY WON"
-else
-        call function "YOU LOSE"
-        + call function "MONEY LOST"
-*/
-
-/*FUNCTION You Win:
-Reveals all dealer cards
-    call function "MONEY WON"
-*/
-
-/*FUNCTION You lose:
-Reveals all dealer cards
-    call function "MONEY LOST"
-
-*/
-
-//FUNCTION Money won:
-// money += moneyOnBet
-
-//FUNCTION Money lost:
-// money -= moneyOnBet

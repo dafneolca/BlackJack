@@ -10,9 +10,14 @@ html {
   box-sizing: inherit;
 }
 
-h1, p {
+h1 {
   display: flex;
   justify-content: center;
+}
+
+p {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 html, body {
@@ -26,6 +31,14 @@ html, body {
 #introduction {
   font-family: 'Playfair Display', serif;
   font-size: 100px;
+}
+
+#top-container {
+  padding: 3% 0%;
+}
+
+#bottom-container {
+  padding: 3% 0%;
 }
 
 img {
@@ -56,6 +69,17 @@ img {
   padding: 10%;
   font-family: 'Playfair Display', serif;
   font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Playfair Display', serif;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 2%;
+  font-size: 10 pt;
+  word-wrap: normal;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  color: #29293b;
+  background: #ffffff;
+  border: solid #000000 1px;
 }
 
 #player-status {
@@ -64,7 +88,7 @@ img {
   padding-top: 5%;
 }
 
-#start-button, #hitButton, #standButton, #newGameButton {
+#hitButton, #standButton, #newGameButton {
   font-family: 'Playfair Display', serif;
   font-family: 'Josefin Sans', sans-serif;
   padding: 2%;

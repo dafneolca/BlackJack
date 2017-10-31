@@ -171,30 +171,44 @@ function BlackJack(mainContainerElement) {
     var dealerCard2 = document.createElement("img");
     var playerCard2 = document.createElement("img");
 
-    //  for (var i = 0; i < 2; i++) {
-    console.log("heres the loop");
+    //Places 2 cards for the dealer
     var cardDealer = self.cards.pop();
     var cardDealer2 = self.cards.pop();
+    console.log(cardDealer);
+    console.log(cardDealer2);
     dealerCard.src = cardDealer.img; // dealerCard.style.display = "none";
-    dealerCard2.src = cardDealer.img;
+    dealerCard2.src = cardDealer2.img;
 
-    self.dealerSum += cardDealer.value + cardDealer2;
+    //sums up value of cards
+    self.dealerSum += cardDealer.value + cardDealer2.value;
 
-    //create new div
+    //create new div here - DISPLAYS dealers cards
     self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
     self.dealersCardsDiv.appendChild(dealerCard2);
 
-    //  }
-    console.log(self.dealerSum);
-    // dealerCard.src = self.cards[Math.floor(Math.random() * self.cards.length)].img;
-    // playerCard.src = self.cards[Math.floor(Math.random() * self.cards.length)].img;
-    // dealerCard2.src = "card_images/back.png";
-    // playerCard2.src = "card_images/back.png";
-    // self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
-    // self.playersCardsDiv.appendChild(playerCard); //PLAYERS CARDS
-    // self.dealersCardsDiv.appendChild(dealerCard2); //DEALERS CARDS
-    // self.playersCardsDiv.appendChild(playerCard2); //PLAYERS CARDS
-    // document.getElementById("newGameButton").disabled = true;
+
+    //WORK ON NEXT!!!!
+
+    ///////////Places 2 cards for the player
+    /*  var cardPlayer = self.cards.pop();
+    var cardPlayer2 = self.cards.pop();
+    console.log(cardPlayer);
+    console.log(cardPlayer2);
+    dealerCard.src = cardPlayer.img; // dealerCard.style.display = "none";
+    dealerCard2.src = cardPlayer2.img;
+
+    //sums up value of cards
+    self.dealerSum += cardPlayer.value + cardPlayer2.value;
+
+    //create new div here - DISPLAYS dealers cards
+    self.dealersCardsDiv.appendChild(cardPlayer); //DEALERS CARDS
+    self.dealersCardsDiv.appendChild(cardPlayer2);
+
+*/
+
+
+    //DISABLES NEW GAME BUTTON AFTER FIRST RUN
+    document.getElementById("newGameButton").disabled = true;
 
     //CREATE FOOTER
 

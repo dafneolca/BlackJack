@@ -1,6 +1,8 @@
+var blackjack = null;
+
 function init() {
   var mainContainer = document.getElementById('main');
-  var blackjack = new BlackJack(mainContainer);
+  blackjack = new BlackJack(mainContainer);
   blackjack.buildStartScreen();
 
 }

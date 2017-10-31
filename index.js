@@ -1,32 +1,39 @@
+"use strict";
+
 function BlackJack(mainContainerElement) {
   var self = this;
   self.startscreen = null;
   self.gameboard = null;
   self.mainContainer = mainContainerElement;
   self.money = 100;
+  self.dealersCardsDiv = null;
+  self.playersCardsDiv = null;
+  self.backCard = null;
   self.cards = [
     // 2
     {
       name: "2 of clubs",
-      img: "2_of_clubs.png",
+      img: "card_images/2_of_clubs.png",
       value: 2
     },
     {
       name: "2 of diamonds",
-      img: "2_of_diamonds.png",
+      img: "card_images/2_of_diamonds.png",
       value: 2
     },
     {
       name: "2 of hearts",
-      img: "2_of_clubs.png",
+      img: "card_images/2_of_clubs.png",
       value: 2
     },
     {
       name: "2 of hearts",
-      img: "2_of_hearts.png",
+      img: "card_images/2_of_hearts.png",
       value: 2
     },
   ];
+
+
 
   self.buildStartScreen = function() {
     var title = document.createElement("h1");
@@ -37,6 +44,7 @@ function BlackJack(mainContainerElement) {
     startButton.setAttribute("id", "start-button");
     startButton.addEventListener("click", self.buildGameScreen);
     self.mainContainer.appendChild(startButton);
+
   };
 
   self.destroyStartScreen = function() {
@@ -46,88 +54,86 @@ function BlackJack(mainContainerElement) {
   self.buildGameScreen = function() {
     self.destroyStartScreen(); /// WORKS
 
+    ////////////      HEADINGS    ////////////
     // DEALERS CARDS HEADING
-    var topContainer = document.createElement("containerBox");
-    topContainer.setAttribute("id", "top-container");
+    self.dealersCardsDiv = document.createElement("div");
+    self.dealersCardsDiv.setAttribute("id", "top-container");
     var dealerCardsText = document.createElement("h1");
     dealerCardsText.innerText = "Dealer's Cards";
-    topContainer.appendChild(dealerCardsText);
+    self.dealersCardsDiv.appendChild(dealerCardsText);
     var bodyTag = document.getElementsByTagName("body");
-    bodyTag[0].appendChild(topContainer);
+    bodyTag[0].appendChild(self.dealersCardsDiv);
 
     // PLAYERS CARDS HEADING
-    var bottomContainer = document.createElement("containerBox");
-    bottomContainer.setAttribute("id", "bottom-container");
+    self.playersCardsDiv = document.createElement("div");
+    self.playersCardsDiv.setAttribute("id", "bottom-container");
     var playerCardText = document.createElement("h1");
     playerCardText.innerText = "Player's Cards";
-    bottomContainer.appendChild(playerCardText);
-    bodyTag[0].appendChild(bottomContainer);
+    self.playersCardsDiv.appendChild(playerCardText);
+    bodyTag[0].appendChild(self.playersCardsDiv);
 
-    //CREATE NEW GAME BUTTON
+    ////////////      BUTTONS      ////////////
+    //BUTTON NEW GAME
     var newGameButton = document.createElement("button");
     newGameButton.innerText = "New Game";
     newGameButton.setAttribute("id", "newGameButton");
     newGameButton.addEventListener("click", self.newGame);
-    bottomContainer.appendChild(newGameButton);
-    console.log(bottomContainer);
+    bodyTag[0].appendChild(newGameButton);
+
+    //BUTTON HIT
+    var hitButton = document.createElement("button");
+    hitButton.innerText = "Hit";
+    hitButton.setAttribute("id", "hitButton");
+    hitButton.addEventListener("click", self.hit);
+    bodyTag[0].appendChild(hitButton);
+
+    //BUTTON STAND
+    var standButton = document.createElement("button");
+    standButton.innerText = "Stand";
+    standButton.setAttribute("id", "standButton");
+    standButton.addEventListener("click", self.stand);
+    bodyTag[0].appendChild(standButton);
   };
 
+
+  ////////////      METHODS      ////////////
   //NEW GAME FUNCTION
   self.newGame = function() {
-    console.log("check it out");
-    //DEALERS CARDS
-    var dealersCardsDiv = document.createElement("containerBox");
-    var dealersCardsImage1 = document.createElement("img");
-    dealersCardsImage1.src = "card_images/back.png";
-    var dealersCardsImage2 = document.createElement("img");
-    dealersCardsImage2.src = "card_images/back.png";
-    dealersCardsDiv.appendChild(dealersCardsImage1);
-    dealersCardsDiv.appendChild(dealersCardsImage2);
-    var bodyTag = document.getElementsByTagName("body");
-    bodyTag[0].appendChild(dealersCardsDiv);
-
-    //PLAYERS CARDS
-    var playersCardsDiv = document.createElement("containerBox");
-    var playersCardsImage1 = document.createElement("img");
-    playersCardsImage1.src = "card_images/back.png";
-    var playersCardsImage2 = document.createElement("img");
-    playersCardsImage2.src = "card_images/back.png";
-    playersCardsDiv.appendChild(playersCardsImage1);
-    playersCardsDiv.appendChild(playersCardsImage2);
-    bodyTag[0].appendChild(playersCardsDiv);
+    var dealerCard = document.createElement("img");
+    var playerCard = document.createElement("img");
+    var dealerCard2 = document.createElement("img");
+    var playerCard2 = document.createElement("img");
+    dealerCard.src = "card_images/back.png";
+    playerCard.src = "card_images/back.png";
+    dealerCard2.src = "card_images/back.png";
+    playerCard2.src = "card_images/back.png";
+    self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
+    self.playersCardsDiv.appendChild(playerCard); //PLAYERS CARDS
+    self.dealersCardsDiv.appendChild(dealerCard2); //DEALERS CARDS
+    self.playersCardsDiv.appendChild(playerCard2); //PLAYERS CARDS
+    document.getElementById("newGameButton").disabled = true;
   };
+
+  //HIT FUNCTION
+  self.hit = function() {
+    var newPlayerCard = document.createElement("img");
+    newPlayerCard.src = "card_images/back.png";
+    self.playersCardsDiv.appendChild(newPlayerCard); //PLAYERS CARDS
+  };
+
+  self.stand = function() {
+    console.log("Stand Button works");
+    self.randomCardGenerator();
+
+  };
+  self.randomCardGenerator = function() {
+    var randomCard = Math.floor(Math.random() * self.cards.length);
+    console.log(self.cards[randomCard].value);
+  };
+
 }
 
 
-/*  //CREATE HIT BUTTON
-var buttonContainer = document.createElement("container-box");
-var hitButton = document.createElement("button");
-hitButton.innerText = "Hit";
-hitButton.setAttribute("id", "hitButton");
-hitButton.addEventListener("click", self.hit);
-buttonContainer.appendChild(hitButton);
-bodyTag[0].appendChild(buttonContainer);
-
-//CREATE STAND BUTTON
-var standButton = document.createElement("button");
-standButton.innerText = "Stand";
-standButton.setAttribute("id", "standButton");
-standButton.addEventListener("click", self.stand);
-self.buttonContainer.appendChild(standButton);
-*/
-
-
-
-/*//HIT FUNCTION
-self.hit = function() {
-  console.log("Hit Function");
-};
-
-//STAND FUNCTION
-self.stand = function() {
-  console.log("Stand Function");
-};
-*/
 
 
 

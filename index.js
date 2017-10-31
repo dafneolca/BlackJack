@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 function BlackJack(mainContainerElement) {
   var self = this;
@@ -33,8 +33,6 @@ function BlackJack(mainContainerElement) {
     },
   ];
 
-
-
   self.buildStartScreen = function() {
     var title = document.createElement("h1");
     title.innerText = "Welcome to BlackJack";
@@ -44,7 +42,6 @@ function BlackJack(mainContainerElement) {
     startButton.setAttribute("id", "start-button");
     startButton.addEventListener("click", self.buildGameScreen);
     self.mainContainer.appendChild(startButton);
-
   };
 
   self.destroyStartScreen = function() {
@@ -72,6 +69,11 @@ function BlackJack(mainContainerElement) {
     self.playersCardsDiv.appendChild(playerCardText);
     bodyTag[0].appendChild(self.playersCardsDiv);
 
+    // SCORE SECTION IN FOOTER
+
+
+
+
     ////////////      BUTTONS      ////////////
     //BUTTON NEW GAME
     var newGameButton = document.createElement("button");
@@ -93,6 +95,14 @@ function BlackJack(mainContainerElement) {
     standButton.setAttribute("id", "standButton");
     standButton.addEventListener("click", self.stand);
     bodyTag[0].appendChild(standButton);
+
+    //FOOTER WITH SCORE
+    self.footerDiv = document.createElement("div");
+    self.footerDiv.setAttribute("id", "footer-div");
+    var scoreInfo = document.createElement("p");
+    scoreInfo.innerText = "You have #. Hit or Stand?";
+    self.footerDiv.appendChild(scoreInfo);
+    bodyTag[0].appendChild(self.footerDiv);
   };
 
 
@@ -112,46 +122,55 @@ function BlackJack(mainContainerElement) {
     self.dealersCardsDiv.appendChild(dealerCard2); //DEALERS CARDS
     self.playersCardsDiv.appendChild(playerCard2); //PLAYERS CARDS
     document.getElementById("newGameButton").disabled = true;
+
+    //CREATE FOOTER
+
   };
+
 
   //HIT FUNCTION
   self.hit = function() {
     var newPlayerCard = document.createElement("img");
     newPlayerCard.src = "card_images/back.png";
     self.playersCardsDiv.appendChild(newPlayerCard); //PLAYERS CARDS
-  };
 
+
+
+  };
+  //STAND FUNCTION
   self.stand = function() {
     console.log("Stand Button works");
     self.randomCardGenerator();
 
   };
+
+  //RANDOM CARD GENERATOR FUNCTION
   self.randomCardGenerator = function() {
     var randomCard = Math.floor(Math.random() * self.cards.length);
-    console.log(self.cards[randomCard].value);
+    console.log(self.cards[randomCard].name);
   };
+
+  //CARD SHUFFLE FUNCTION
+  /*  self.shuffleCard = function() {
+      let counter = self.cards.length;
+      while (counter > 0) {
+        var ix = Math.floor(Math.random() * counter);
+        counter -= 1;
+        var temp = self.cards[counter];
+        self.cards[counter] = self.cards[index];
+        self.cards[index] = temp;
+      }
+    }; */
+
 
 }
 
 
 
 
-
-/*shuffleCard = function() {
-  var counter = this.cards.length;
-  while (counter > 0) {
-    var index = Math.floor(Math.random() * counter);
-    counter -= 1;
-    var temp = this.cards[counter];
-    this.cards[counter] = this.cards[index];
-    this.cards[index] = temp;
-  }
-};
-*/
-
 //var moneyOnBet= userInput;
 
-//onclick method to start new game, build blackjack NEW game
+
 
 /*FUNCTION Hit:
 Adds 1 new card to "YOUR CARDS".

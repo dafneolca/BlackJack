@@ -165,7 +165,138 @@ function BlackJack(mainContainerElement) {
      name: "8 of spades",
      img: "card_images/8_of_spades.png",
      value: 8
-    }
+   },
+
+    ////// 9
+    {
+      name: "9 of clubs",
+      img: "card_images/9_of_clubs.png",
+      value: 9
+    },
+    {
+    name: "9 of diamonds",
+    img: "card_images/9_of_diamonds.png",
+    value: 9
+    },
+    {
+    name: "9 of hearts",
+    img: "card_images/9_of_hearts.png",
+    value: 9
+    },
+    {
+    name: "9 of spades",
+    img: "card_images/9_of_spades.png",
+    value: 9
+  },
+
+    ////// 10
+    {
+    name: "10 of clubs",
+    img: "card_images/10_of_clubs.png",
+    value: 10
+    },
+    {
+    name: "10 of diamonds",
+    img: "card_images/10_of_diamonds.png",
+    value: 10
+    },
+    {
+    name: "10 of hearts",
+    img: "card_images/10_of_hearts.png",
+    value: 10
+    },
+    {
+    name: "10 of spades",
+    img: "card_images/10_of_spades.png",
+    value: 10
+  },
+
+    ////// ACE
+    {
+    name: "ace of clubs",
+    img: "card_images/ace_of_clubs.png",
+    value: 1
+    },
+    {
+    name: "ace  of diamonds",
+    img: "card_images/ace_of_diamonds.png",
+    value: 1
+    },
+    {
+    name: "ace  of hearts",
+    img: "card_images/ace_of_hearts.png",
+    value: 1
+    },
+    {
+    name: "ace  of spades",
+    img: "card_images/ace_of_spades.png",
+    value: 1
+  },
+
+    ////// JACK
+    {
+    name: "jack of clubs",
+    img: "card_images/jack_of_clubs.png",
+    value: 10
+    },
+    {
+    name: "jack of diamonds",
+    img: "card_images/jack_of_diamonds.png",
+    value: 10
+    },
+    {
+    name: "jack of hearts",
+    img: "card_images/jack_of_hearts.png",
+    value: 10
+    },
+    {
+    name: "jack of spades",
+    img: "card_images/jack_of_spades.png",
+    value: 10
+  },
+
+    ////// KING
+    {
+    name: "king of clubs",
+    img: "card_images/king_of_clubs.png",
+    value: 10
+    },
+    {
+    name: "king  of diamonds",
+    img: "card_images/king_of_diamonds.png",
+    value: 10
+    },
+    {
+    name: "king  of hearts",
+    img: "card_images/king_of_hearts.png",
+    value: 10
+    },
+    {
+    name: "king  of spades",
+    img: "card_images/king_of_spades.png",
+    value: 10
+  },
+  ////// queen
+  {
+  name: "queen of clubs",
+  img: "card_images/queen_of_clubs.png",
+  value: 10
+  },
+  {
+  name: "queen of diamonds",
+  img: "card_images/queen_of_diamonds.png",
+  value: 10
+  },
+  {
+  name: "queen  of hearts",
+  img: "card_images/queen_of_hearts.png",
+  value: 10
+  },
+  {
+  name: "queen of spades",
+  img: "card_images/queen_of_spades.png",
+  value: 10
+  }
   ];
 
   self.buildStartScreen = function() {
@@ -331,19 +462,20 @@ function BlackJack(mainContainerElement) {
 
   self.updateDOMScore = function() {
 
-    if(self.playerSum < 20 && self.dealerSumStand < self.playerSum) {
-    self.scoreInfo.innerText = "You have " + self.playerSum +". Hit or Stand?";
+    if ((self.playerSum < 20) && (self.dealerSumStand < self.playerSum)) {
+    self.scoreInfo.innerText = "You have " + self.playerSum + ". Dealer has "+self.dealerSum+". Hit or Stand?";
 
   } else if(self.playerSum === 21) {
-    self.scoreInfo.innerText = "You have " + self.playerSum +". BLACKJACK!";
+    self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". BLACKJACK! You win!";
     document.getElementById("hitButton").disabled = true;
     document.getElementById("standButton").disabled = true;
     document.getElementById("newGameButton").disabled = false;
+
     self.money += self.betInput;
     self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
 
   } else if(self.dealerSumStand >= self.playerSum && self.dealerSumStand <= 21){
-    self.scoreInfo.innerText = "You have " + self.playerSum +". YOU LOOSE!!";
+    self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU LOOSE!!";
     document.getElementById("hitButton").disabled = true;
     document.getElementById("standButton").disabled = true;
     document.getElementById("newGameButton").disabled = false;
@@ -351,7 +483,7 @@ function BlackJack(mainContainerElement) {
     self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
 
   } else if(self.playerSum > 21) {
-    self.scoreInfo.innerText = "You have " + self.playerSum +". YOU LOOSE!!";
+    self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". YOU LOOSE!!";
     document.getElementById("hitButton").disabled = true;
     document.getElementById("standButton").disabled = true;
     document.getElementById("newGameButton").disabled = false;
@@ -359,7 +491,7 @@ function BlackJack(mainContainerElement) {
     self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
 
   } else if(self.dealerSumStand > 21) {
-    self.scoreInfo.innerText = "You have " + self.playerSum +". YOU WIN!";
+    self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". YOU WIN!";
     document.getElementById("hitButton").disabled = true;
     document.getElementById("standButton").disabled = true;
     document.getElementById("newGameButton").disabled = false;
@@ -368,8 +500,6 @@ function BlackJack(mainContainerElement) {
 
   }
 
-
-    //self.currentBalance = "Your current balance is: #" + "You bet: #"
 
   };
 
@@ -400,10 +530,6 @@ self.updateDOMScore();
         var dealerCard = document.createElement("img");
         dealerCard.src = cardDealer.img;
         self.dealersCardsDiv.appendChild(dealerCard);
-
-
-
-
 
     }
   };

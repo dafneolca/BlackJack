@@ -1,6 +1,4 @@
-* {
-  border: solid black 1px;
-}
+
 
 html {
   box-sizing: border-box;
@@ -19,6 +17,7 @@ h1 {
 p {
   display: flex;
   justify-content: space-evenly;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 html, body {
@@ -41,7 +40,19 @@ html, body {
 
 
 img {
-  width: 10%;
+  width: 20%;
+  padding: 0px 10px;
+}
+
+.displayed-cards {
+  display: flex;
+  justify-content: center;
+  padding: 0px 10px;
+  width: 20%
+}
+
+#hidden-card2 {
+
 }
 
 #main {
@@ -64,17 +75,7 @@ img {
   border: solid #000000 1px;
 }
 
-.displayed-cards {
-  display: flex;
-  justify-content: center;
 
-
-}
-
-#hidden-card2 {
-  background-image: url("./card_images/back.png");
-  display: none;
-}
 
 #introduction {
   display: flex;
@@ -84,19 +85,16 @@ img {
   font-family: 'Playfair Display', serif;
 }
 
-
-
 #player-status {
   display: flex;
   justify-content: space-around;
-
 }
 
 #hitButton, #standButton, #newGameButton {
   font-family: 'Playfair Display', serif;
   font-family: 'Josefin Sans', sans-serif;
   padding: 2%;
-  font-size: 10 pt;
+  font-size: 16 pt;
   word-wrap: normal;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
@@ -111,10 +109,6 @@ img {
   text-decoration: none;
 }
 
-#youLostScreen {
-  font-family: 'Playfair Display', serif;
-  background-color: red;
-
 
 @media (min-width: 320px) {
   img {
@@ -124,12 +118,7 @@ img {
 
 @media (min-width: 768px) {
   img {
-    width: 20%;
+    width: 10%;
   }
 
-  @media (min-width: 60px) {
-    img {
-      width: 7%;
-    }
-  }
 }

@@ -54,6 +54,49 @@ function BlackJack(mainContainerElement) {
       img: "card_images/3_of_spades.png",
       value: 3
     },
+
+    //4
+    {
+      name: "4 of clubs",
+      img: "card_images/4_of_clubs.png",
+      value: 4
+    },
+    {
+      name: "4 of diamonds",
+      img: "card_images/4_of_diamonds.png",
+      value: 4
+    },
+    {
+      name: "4 of hearts",
+      img: "card_images/4_of_hearts.png",
+      value: 4
+    },
+    {
+      name: "4 of spades",
+      img: "card_images/4_of_spades.png",
+      value: 4
+    },
+            ////// 5
+    {
+      name: "5 of clubs",
+      img: "card_images/5_of_clubs.png",
+      value: 5
+    },
+    {
+      name: "5 of diamonds",
+      img: "card_images/5_of_diamonds.png",
+      value: 5
+    },
+    {
+      name: "5 of hearts",
+      img: "card_images/5_of_hearts.png",
+      value: 5
+    },
+    {
+      name: "5 of spades",
+      img: "card_images/5_of_spades.png",
+      value: 5
+    },
   ];
 
 
@@ -72,8 +115,32 @@ function BlackJack(mainContainerElement) {
   self.destroyStartScreen = function() {
     self.mainContainer.remove(); // WORKS
   };
+  self.shuffleCards = function() {
+
+    function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+self.cards = shuffle(self.cards);
+  }
 
   self.buildGameScreen = function() {
+    self.shuffleCards();
     self.destroyStartScreen(); /// WORKS
 
     ////////////      HEADINGS    ////////////
@@ -140,75 +207,53 @@ function BlackJack(mainContainerElement) {
 
   ////////////      METHODS      ////////////
 
-  // SHUFFLE CARDS FUNCTION
-  /*self.shuffleCards = function() {
-    var j = 0;
-    var temp = null;
-    for (var i = 52; i > 0; i -= 1) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = self.cards[i];
-      self.cards[i] = self.cards[j];
-      self.cards[j] = temp;
-    }
-    return self.cardsShuffled;
-  };
-*/
-
-  /*
-  name: "2 of clubs",
-  img: "card_images/2_of_clubs.png",
-  value: 2
-  */
-
   //NEW GAME FUNCTION
   self.newGame = function() {
 
-
-    console.log("cardsShuffled");
-
-    var dealerCard = document.createElement("img");
-    var playerCard = document.createElement("img");
-    var dealerCard2 = document.createElement("img");
-    var playerCard2 = document.createElement("img");
-
+    //sums up value of cards
     //Places 2 cards for the dealer
-    var cardDealer = self.cards.pop();
+    var cardDealer1 = self.cards.pop();
     var cardDealer2 = self.cards.pop();
-    console.log(cardDealer);
-    console.log(cardDealer2);
-    dealerCard.src = cardDealer.img; // dealerCard.style.display = "none";
-    dealerCard2.src = cardDealer2.img;
+    self.dealerSum += cardDealer1.value + cardDealer2.value;
 
-    //sums up value of cards
-    self.dealerSum += cardDealer.value + cardDealer2.value;
-
-    //create new div here - DISPLAYS dealers cards
-    self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
-    self.dealersCardsDiv.appendChild(dealerCard2);
-
-
-    //WORK ON NEXT!!!!
-
-    ///////////Places 2 cards for the player
-    /*  var cardPlayer = self.cards.pop();
+    var cardPlayer1 = self.cards.pop();
     var cardPlayer2 = self.cards.pop();
-    console.log(cardPlayer);
-    console.log(cardPlayer2);
-    dealerCard.src = cardPlayer.img; // dealerCard.style.display = "none";
-    dealerCard2.src = cardPlayer2.img;
-
-    //sums up value of cards
-    self.dealerSum += cardPlayer.value + cardPlayer2.value;
-
-    //create new div here - DISPLAYS dealers cards
-    self.dealersCardsDiv.appendChild(cardPlayer); //DEALERS CARDS
-    self.dealersCardsDiv.appendChild(cardPlayer2);
-
-*/
-
-
-    //DISABLES NEW GAME BUTTON AFTER FIRST RUN
-    document.getElementById("newGameButton").disabled = true;
+    self.playerSum += cardPlayer1.value + cardPlayer2.value;
+    // var dealerCard1 = document.createElement("img");
+    // var playerCard1 = document.createElement("img");
+    // var dealerCard2 = document.createElement("img");
+    // var playerCard2 = document.createElement("img");
+    //
+    // dealerCard1.src = cardDealer1.img; // dealerCard.style.display = "none";
+    // dealerCard2.src = cardDealer2.img;
+    //
+    //
+    // //create new div here - DISPLAYS dealers cards
+    // self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
+    // self.dealersCardsDiv.appendChild(dealerCard2);
+    //
+    //
+    // //WORK ON NEXT!!!!
+    //
+    // ///////////Places 2 cards for the player
+    //
+    // playerCard.src = cardPlayer.img; // dealerCard.style.display = "none";
+    // playerCard2.src = cardPlayer2.img;
+    //
+    // //sums up value of cards
+    // self.dealerSum += cardPlayer.value + cardPlayer2.value;
+    //
+    // //create new div here - DISPLAYS dealers cards
+    // var playersCardArea = document.createElement("div");
+    // self.playersCardsDiv.appendChild(playersCardArea);
+    // playersCardArea.appendChild(cardPlayer);
+    // // self.playersCardsDiv.appendChild(cardPlayer); //DEALERS CARDS
+    // // self.playersCardsDiv.appendChild(cardPlayer2);
+    //
+    //
+    //
+    // //DISABLES NEW GAME BUTTON AFTER FIRST RUN
+    // document.getElementById("newGameButton").disabled = true;
 
     //CREATE FOOTER
 
@@ -224,32 +269,61 @@ function BlackJack(mainContainerElement) {
 
 
   self.hit = function() {
-    var dealerCard = document.createElement("img");
-    var playerCard = document.createElement("img");
 
-    var cardDealer = self.cards.pop();
     var cardPlayer = self.cards.pop();
-
-    dealerCard.src = cardDealer.img; // dealerCard.style.display = "none";
-    dealerCard2.src = cardDealer.img;
-
-    self.dealerSum += cardDealer.value + cardDealer2;
-
-    //create new div
-    self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
-    self.dealersCardsDiv.appendChild(dealerCard2);
-
-    var newPlayerCard = document.createElement("img");
-    newPlayerCard.src = "card_images/back.png";
-    self.playersCardsDiv.appendChild(newPlayerCard); //PLAYERS CARDS
+    self.playerSum += cardPlayer.value;
+    //
+    // var dealerCard = document.createElement("img");
+    // var playerCard = document.createElement("img");
+    //
+    // dealerCard.src = cardDealer.img; // dealerCard.style.display = "none";
+    // dealerCard2.src = cardDealer.img;
+    //
+    //
+    // //create new div
+    // self.dealersCardsDiv.appendChild(dealerCard); //DEALERS CARDS
+    // self.dealersCardsDiv.appendChild(dealerCard2);
+    //
+    // var newPlayerCard = document.createElement("img");
+    // newPlayerCard.src = "card_images/back.png";
+    // self.playersCardsDiv.appendChild(newPlayerCard); //PLAYERS CARDS
 
 
 
   };
   //STAND FUNCTION
   self.stand = function() {
-    console.log("Stand Button works");
-    self.randomCardGenerator();
+    //DOM turn all cards around to face, one by one.
+
+    // first if should be looped
+
+    for (var i=0; i<= self.playerCardArray.length; i++ ) {
+      var cardDealer1 = self.cards.pop();
+      if (self.dealerSum<=18) {
+        self.dealerSum += cardDealer1.value;
+      }
+    }
+
+    if (self.dealerSum>self.playerSum && self.dealerSum <=21) {
+      console.log("you lose!!");
+      // DISPLAY YOU LOSE
+    }
+
+    else if (self.dealerSum<self.playerSum && self.playerSum <21) {
+      console.log("you win!");
+    }
+
+    else if (self.playerSum === 21) {
+      console.log("BLACKJACK!!!");
+    }
+
+    else if (self.dealerSum === self.playerSum && self.playerSum< 21) {
+      console.log("you lose");
+    }
+
+    else if (self.playerSum < 21 && self.playerCardArray.length===5) {
+      console.log("you win!");
+    }
 
   };
 

@@ -10,6 +10,7 @@ html {
   box-sizing: inherit;
 }
 
+
 h1 {
   display: flex;
   justify-content: center;
@@ -33,13 +34,11 @@ html, body {
   font-size: 100px;
 }
 
-#top-container {
-  padding: 3% 0%;
+#buttonDiv {
+  display: flex;
+  justify-content: center;
 }
 
-#bottom-container {
-  padding: 3% 0%;
-}
 
 img {
   width: 10%;
@@ -47,12 +46,34 @@ img {
 
 #main {
   padding: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#start-button {
+  display: flex;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 2%;
+  font-size: 30 pt;
+  word-wrap: normal;
+  border-radius: 28px;
+  color: #29293b;
+  background: #ffffff;
+  border: solid #000000 1px;
 }
 
 .displayed-cards {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: center;
+
+
+}
+
+#hidden-card2 {
+  background-image: url("./card_images/back.png");
+  display: none;
 }
 
 #introduction {
@@ -63,29 +84,12 @@ img {
   font-family: 'Playfair Display', serif;
 }
 
-#start-button {
-  display: flex;
-  justify-content: center;
-  padding: 10%;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Josefin Sans', sans-serif;
-  padding: 2%;
-  font-size: 10 pt;
-  word-wrap: normal;
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  color: #29293b;
-  background: #ffffff;
-  border: solid #000000 1px;
-}
+
 
 #player-status {
   display: flex;
   justify-content: space-around;
-  padding-top: 5%;
+
 }
 
 #hitButton, #standButton, #newGameButton {
@@ -105,4 +109,27 @@ img {
 #start-button:hover, #hitButton:hover, #standButton:hover, #newGameButton:hover {
   background: #d4d4d4;
   text-decoration: none;
+}
+
+#youLostScreen {
+  font-family: 'Playfair Display', serif;
+  background-color: red;
+
+
+@media (min-width: 320px) {
+  img {
+    width: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  img {
+    width: 20%;
+  }
+
+  @media (min-width: 60px) {
+    img {
+      width: 7%;
+    }
+  }
 }

@@ -317,7 +317,6 @@ function BlackJack(mainContainerElement) {
   self.buildGameScreen = function() {
     self.shuffleCards();
     self.destroyStartScreen();
-    ////////////      HEADINGS    ////////////
     // DEALERS CARDS HEADING
     self.dealersCardsDiv = document.createElement("div");
     self.dealersCardsDiv.setAttribute("id", "top-container");
@@ -368,7 +367,6 @@ function BlackJack(mainContainerElement) {
     // var bodyTag = document.getElementsByTagName("body");
     bodyTag[0].appendChild(self.footerDiv);
   };
-
 
   ////////////      METHODS      ////////////
 
@@ -421,30 +419,26 @@ function BlackJack(mainContainerElement) {
     else if(self.playerSum === 21) {
       self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". BLACKJACK! You win!";
       document.getElementById("hidden-card2").style.visibility ="visible";
-      self.buttonEnable();
       self.money += self.betInput;
-      self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
+      self.buttonEnable();
     }
     else if(self.dealerSumStand >= self.playerSum && self.dealerSumStand <= 21){
       self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU LOOSE!!";
       document.getElementById("hidden-card2").style.visibility ="visible";
-      self.buttonEnable();
       self.money -= self.betInput;
-      self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
+      self.buttonEnable();
     }
     else if(self.playerSum > 21) {
       self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". YOU LOOSE!!";
       document.getElementById("hidden-card2").style.visibility ="visible";
-      self.buttonEnable();
       self.money -= self.betInput;
-      self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
+      self.buttonEnable();
     }
     else if(self.dealerSumStand > 21) {
       document.getElementById("hidden-card2").style.visibility ="visible";
       self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU WIN!";
-      self.buttonEnable();
       self.money += self.betInput;
-      self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
+      self.buttonEnable();
     }
   };
 
@@ -453,6 +447,7 @@ function BlackJack(mainContainerElement) {
     document.getElementById("hitButton").disabled = true;
     document.getElementById("standButton").disabled = true;
     document.getElementById("newGameButton").disabled = false;
+    self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
   };
 
   // HIT FUNCTION

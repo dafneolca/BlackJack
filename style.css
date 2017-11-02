@@ -1,7 +1,15 @@
 
-
 html {
   box-sizing: border-box;
+  background-image: url("https://ballenvegas.com/wp-content/uploads/2014/12/Las-Vegas-Strip-Map.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover
+}
+
+html .img {
+  width: 100%;
 }
 
 *, *:before, *:after {
@@ -12,6 +20,9 @@ html {
 h1 {
   display: flex;
   justify-content: center;
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+  color: yellow;
 }
 
 p {
@@ -28,9 +39,17 @@ html, body {
   overflow: hidden;
 }
 
-#introduction {
-  font-family: 'Playfair Display', serif;
-  font-size: 100px;
+#start-button {
+  display: flex;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 2%;
+  word-wrap: normal;
+  border-radius: 28px;
+  background: red;
+  border: yellow dotted 10px;
+  font-size: 30px;
+
 }
 
 #buttonDiv {
@@ -38,10 +57,48 @@ html, body {
   justify-content: center;
 }
 
+#hitButton, #standButton, #newGameButton {
+  background: red;
+  border: yellow dotted 5px;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 2%;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-size: 16px;
+}
+
+#start-button:hover, #hitButton:hover, #standButton:hover, #newGameButton:hover {
+  border: yellow dotted 17px;
+  text-decoration: none;
+}
+
+#top-container {
+  background-color: black;
+  border: dotted yellow 12px;
+  padding: 2%
+}
+
+#bottom-container {
+  background-color: black;
+  border: dotted yellow 12px;
+    padding: 2%
+}
+
+#introduction {
+  font-family: 'Playfair Display', serif;
+  font-size: 100px;
+}
+
+#footer-div {
+    background-color: #3532c5;
+    padding: 10px;
+}
 
 img {
   width: 20%;
   padding: 0px 10px;
+  opacity: 1;
 }
 
 .displayed-cards {
@@ -64,18 +121,6 @@ img {
   flex-direction: column;
 }
 
-#start-button {
-  display: flex;
-  justify-content: center;
-  font-family: 'Josefin Sans', sans-serif;
-  padding: 2%;
-  font-size: 30 pt;
-  word-wrap: normal;
-  border-radius: 28px;
-  color: #29293b;
-  background: #ffffff;
-  border: solid #000000 1px;
-}
 
 
 
@@ -92,24 +137,7 @@ img {
   justify-content: space-around;
 }
 
-#hitButton, #standButton, #newGameButton {
-  font-family: 'Playfair Display', serif;
-  font-family: 'Josefin Sans', sans-serif;
-  padding: 2%;
-  font-size: 16 pt;
-  word-wrap: normal;
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  color: #29293b;
-  background: #ffffff;
-  border: solid #000000 1px;
-}
 
-#start-button:hover, #hitButton:hover, #standButton:hover, #newGameButton:hover {
-  background: #d4d4d4;
-  text-decoration: none;
-}
 
 
 @media (min-width: 320px) {
@@ -120,7 +148,8 @@ img {
 
 @media (min-width: 768px) {
   img {
-    width: 10%;
+    width: 13%;
   }
+
 
 }

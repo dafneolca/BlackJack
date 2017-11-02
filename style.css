@@ -16,12 +16,11 @@ html .img {
   box-sizing: inherit;
 }
 
-
 h1 {
   display: flex;
   justify-content: center;
   font-family: 'Lobster', cursive;
-  font-size: 20px;
+  font-size: 30px;
   color: yellow;
 }
 
@@ -29,6 +28,7 @@ p {
   display: flex;
   justify-content: space-evenly;
   font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
 }
 
 html, body {
@@ -37,6 +37,9 @@ html, body {
   padding: 2%;
   margin: 0px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  alignt-content: center;
 }
 
 #start-button {
@@ -49,56 +52,67 @@ html, body {
   background: red;
   border: yellow dotted 10px;
   font-size: 30px;
-
 }
 
 #buttonDiv {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 #hitButton, #standButton, #newGameButton {
   background: red;
   border: yellow dotted 5px;
   font-family: 'Josefin Sans', sans-serif;
-  padding: 2%;
+  padding: 1%;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 28px;
   font-size: 16px;
 }
 
-#start-button:hover, #hitButton:hover, #standButton:hover, #newGameButton:hover {
-  border: yellow dotted 17px;
-  text-decoration: none;
+#hitButton:hover, #standButton:hover, #newGameButton:hover {
+  border: yellow dotted 5px;
+  cursor: pointer;
+  background-color: rgb(77, 177, 200);
+  font-size: 18px;
+}
+
+#start-button:hover{
+  border: yellow dotted 30px;
+  cursor: pointer;
 }
 
 #top-container {
   background-color: black;
   border: dotted yellow 12px;
   padding: 2%
+  display: flex;
 }
 
 #bottom-container {
   background-color: black;
   border: dotted yellow 12px;
-    padding: 2%
+  padding: 2%
+  display: flex;
 }
 
 #introduction {
   font-family: 'Playfair Display', serif;
   font-size: 100px;
+  display: flex;
 }
 
 #footer-div {
-    background-color: #3532c5;
-    padding: 10px;
+  background-color: #3532c5;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
 }
 
 img {
-  width: 20%;
-  padding: 0px 10px;
-  opacity: 1;
+  width: 10%;
+  padding: 10px;
 }
 
 .displayed-cards {
@@ -109,9 +123,7 @@ img {
 }
 
 #hidden-card2 {
-
   background-color: black;
-
 }
 
 #main {
@@ -120,9 +132,6 @@ img {
   justify-content: center;
   flex-direction: column;
 }
-
-
-
 
 #introduction {
   display: flex;
@@ -138,18 +147,32 @@ img {
 }
 
 
-
-
 @media (min-width: 320px) {
   img {
     width: 20%;
+  }
+  p {
+    font-size: 14px;
   }
 }
 
 @media (min-width: 768px) {
   img {
-    width: 13%;
+    width: 10%;
   }
 
+  p {
+    font-size: 18px;
+  }
 
+  #top-container {
+    width: 80%;
+    align-self: center;
+  }
+
+  #bottom-container {
+    width: 80%;
+
+    align-self: center;
+  }
 }

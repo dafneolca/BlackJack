@@ -340,6 +340,12 @@ function BlackJack(mainContainerElement) {
     newGameButton.setAttribute("id", "newGameButton");
     buttonDiv.setAttribute("id", "buttonDiv");
     newGameButton.addEventListener("click", self.newGame);
+
+    var audio = new Audio('song.mp3');
+    newGameButton.addEventListener("click", audio.play());
+
+
+
     bodyTag[0].appendChild(buttonDiv);
     buttonDiv.appendChild(newGameButton);
     //BUTTON HIT
@@ -354,18 +360,26 @@ function BlackJack(mainContainerElement) {
     standButton.setAttribute("id", "standButton");
     standButton.addEventListener("click", self.stand);
     buttonDiv.appendChild(standButton);
-    //FOOTER WITH GAME STATUS
+
     self.footerDiv = document.createElement("div");
     self.footerDiv.setAttribute("id", "footer-div");
     self.currentBalanceP = document.createElement("p");
     self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
     self.footerDiv.appendChild(self.currentBalanceP);
-    ///////// CHECK
+
+
+
+    //FOOTER WITH GAME STATUS
     self.scoreInfo = document.createElement("p");
     self.scoreInfo.innerText = "You have #. Hit or Stand?";
     self.footerDiv.appendChild(self.scoreInfo);
     // var bodyTag = document.getElementsByTagName("body");
     bodyTag[0].appendChild(self.footerDiv);
+
+
+
+    ///////// CHECK
+
   };
 
   ////////////      METHODS      ////////////
@@ -387,6 +401,7 @@ function BlackJack(mainContainerElement) {
     // DEALER LOGIC
     var cardDealer1 = self.shuffledCards.pop();
     var cardDealer2 = self.shuffledCards.pop();
+
     self.dealerSum += cardDealer1.value + cardDealer2.value;
     // DEALER DOM MANIPULATION
     var dealerCard1 = document.createElement("img");
@@ -464,6 +479,9 @@ function BlackJack(mainContainerElement) {
   };
 
   //STAND FUNCTION
+
+
+
   self.stand = function() {
     self.dealerSumStand = self.dealerSum;
     while(self.dealerSumStand <20 && self.dealerSumStand<self.playerSum) {

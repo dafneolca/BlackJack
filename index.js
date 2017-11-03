@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 
 function BlackJack(mainContainerElement) {
   var self = this;
@@ -332,7 +332,9 @@ function BlackJack(mainContainerElement) {
     playerCardText.innerText = "Player's Cards";
     bodyTag[0].appendChild(playerCardText);
     bodyTag[0].appendChild(self.playersCardsDiv);
+
     ////////////      BUTTONS      ////////////
+
     //BUTTON NEW GAME
     var newGameButton = document.createElement("button");
     var buttonDiv = document.createElement("div");
@@ -340,61 +342,47 @@ function BlackJack(mainContainerElement) {
     newGameButton.setAttribute("id", "newGameButton");
     buttonDiv.setAttribute("id", "buttonDiv");
     newGameButton.addEventListener("click", self.newGame);
-
     var audio = new Audio('song.mp3');
     newGameButton.addEventListener("click", audio.play());
-
-
-
     bodyTag[0].appendChild(buttonDiv);
     buttonDiv.appendChild(newGameButton);
+    document.getElementById("newGameButton").disabled = false;
+
     //BUTTON HIT
     var hitButton = document.createElement("button");
     hitButton.innerText = "Hit";
     hitButton.setAttribute("id", "hitButton");
     hitButton.addEventListener("click", self.hit);
     buttonDiv.appendChild(hitButton);
+    document.getElementById("hitButton").disabled = true;
+
     //BUTTON STAND
     var standButton = document.createElement("button");
     standButton.innerText = "Stand";
     standButton.setAttribute("id", "standButton");
     standButton.addEventListener("click", self.stand);
     buttonDiv.appendChild(standButton);
+    document.getElementById("standButton").disabled = true;
 
+    //FOOTER + BET INPUT
     self.footerDiv = document.createElement("div");
     self.footerDiv.setAttribute("id", "footer-div");
     self.currentBalanceP = document.createElement("p");
+
     self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
     self.footerDiv.appendChild(self.currentBalanceP);
-
-    document.getElementById("hitButton").disabled = true;
-    document.getElementById("standButton").disabled = true;
-    document.getElementById("newGameButton").disabled = false;
-
 
 
     //FOOTER WITH GAME STATUS
     self.scoreInfo = document.createElement("p");
-    self.scoreInfo.innerText = "You have #. Hit or Stand?";
+    self.scoreInfo.innerText = "";
     self.footerDiv.appendChild(self.scoreInfo);
-    // var bodyTag = document.getElementsByTagName("body");
     bodyTag[0].appendChild(self.footerDiv);
-
-
-
-    ///////// CHECK
-
   };
 
   ////////////      METHODS      ////////////
-
   //NEW GAME FUNCTION
   self.newGame = function() {
-    document.getElementById("hitButton").disabled = false;
-    document.getElementById("standButton").disabled = false;
-    if (self.shuffledCards.length <10) {
-      self.shuffleCards();
-    }
     // CLEAR SUMS
     self.dealerSum = 0;
     self.playerSum = 0;
@@ -402,11 +390,19 @@ function BlackJack(mainContainerElement) {
     // REMOVE CARDS FROM DOM
     self.dealersCardsDiv.innerText = "";
     self.playersCardsDiv.innerText = "";
+
+    if (self.shuffledCards.length <8) {
+      self.shuffleCards();
+    }
+    document.getElementById("hitButton").disabled = false;
+    document.getElementById("standButton").disabled = false;
+
     // DEALER LOGIC
     var cardDealer1 = self.shuffledCards.pop();
     var cardDealer2 = self.shuffledCards.pop();
-
     self.dealerSum += cardDealer1.value + cardDealer2.value;
+
+
     // DEALER DOM MANIPULATION
     var dealerCard1 = document.createElement("img");
     var dealerCard2 = document.createElement("img");
@@ -416,6 +412,7 @@ function BlackJack(mainContainerElement) {
     self.dealersCardsDiv.appendChild(dealerCard1); //DEALERS CARDS
     self.dealersCardsDiv.appendChild(dealerCard2);
     document.getElementById("hidden-card2").style.visibility ="hidden";
+
     // PLAYER LOGIC
     var cardPlayer1 = self.shuffledCards.pop();
     var cardPlayer2 = self.shuffledCards.pop();
@@ -431,47 +428,6 @@ function BlackJack(mainContainerElement) {
     self.updateDOMScore();
   };
 
-  self.updateDOMScore = function() {
-    if ((self.playerSum < 20) && (self.dealerSumStand < self.playerSum)) {
-      self.scoreInfo.innerText = "You have " + self.playerSum + ". Hit or Stand?";
-      document.getElementById("hitButton").disabled = false;
-      document.getElementById("standButton").disabled = false;
-      document.getElementById("newGameButton").disabled = true;
-    }
-    else if(self.playerSum === 21) {
-      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". BLACKJACK! You win!";
-      document.getElementById("hidden-card2").style.visibility ="visible";
-      self.money += self.betInput;
-      self.buttonEnable();
-    }
-    else if(self.dealerSumStand >= self.playerSum && self.dealerSumStand <= 21){
-      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU LOOSE!!";
-      document.getElementById("hidden-card2").style.visibility ="visible";
-      self.money -= self.betInput;
-      self.buttonEnable();
-    }
-    else if(self.playerSum > 21) {
-      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". YOU LOOSE!!";
-      document.getElementById("hidden-card2").style.visibility ="visible";
-      self.money -= self.betInput;
-      self.buttonEnable();
-    }
-    else if(self.dealerSumStand > 21) {
-      document.getElementById("hidden-card2").style.visibility ="visible";
-      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU WIN!";
-      self.money += self.betInput;
-      self.buttonEnable();
-    }
-  };
-
-
-  self.buttonEnable = function() {
-    document.getElementById("hitButton").disabled = true;
-    document.getElementById("standButton").disabled = true;
-    document.getElementById("newGameButton").disabled = false;
-    self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
-  };
-
   // HIT FUNCTION
   self.hit = function() {
     // PLAYER LOGIC
@@ -485,10 +441,49 @@ function BlackJack(mainContainerElement) {
     self.updateDOMScore();
   };
 
+  //DOM UPDATES
+  self.updateDOMScore = function() {
+    if ((self.playerSum < 20) && (self.dealerSumStand < self.playerSum)) {
+      self.scoreInfo.innerText = "You have " + self.playerSum + ". Hit or Stand?";
+      document.getElementById("hitButton").disabled = false;
+      document.getElementById("standButton").disabled = false;
+      document.getElementById("newGameButton").disabled = true;
+    }
+    else if(self.playerSum === 21) {
+      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". BLACKJACK! You win!";
+      document.getElementById("hidden-card2").style.visibility ="visible";
+      self.money = (self.money + self.betInput);
+      self.buttonEnable();
+    }
+    else if(self.dealerSumStand >= self.playerSum && self.dealerSumStand <= 21){
+      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU LOOSE!!";
+      document.getElementById("hidden-card2").style.visibility ="visible";
+      self.money = (self.money - self.betInput);
+      self.buttonEnable();
+    }
+    else if(self.playerSum > 21) {
+      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". YOU LOOSE!!";
+      document.getElementById("hidden-card2").style.visibility ="visible";
+      self.money = (self.money - self.betInput);
+      self.buttonEnable();
+    }
+    else if (self.dealerSumStand > 21) {
+      document.getElementById("hidden-card2").style.visibility ="visible";
+      self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSumStand+". YOU WIN!";
+      self.money = (self.money + self.betInput);
+      self.buttonEnable();
+    }
+  };
+
+  //CONDITIONAL BUTTON ON/OFF
+  self.buttonEnable = function() {
+    document.getElementById("hitButton").disabled = true;
+    document.getElementById("standButton").disabled = true;
+    document.getElementById("newGameButton").disabled = false;
+    self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
+  };
+
   //STAND FUNCTION
-
-
-
   self.stand = function() {
     self.dealerSumStand = self.dealerSum;
     while(self.dealerSumStand <20 && self.dealerSumStand<self.playerSum) {
@@ -500,4 +495,5 @@ function BlackJack(mainContainerElement) {
     }
     self.updateDOMScore();
   };
+
 }

@@ -367,6 +367,10 @@ function BlackJack(mainContainerElement) {
     self.currentBalanceP.innerText = "Your current balance is: " + self.money + ". You bet: " + self.betInput;
     self.footerDiv.appendChild(self.currentBalanceP);
 
+    document.getElementById("hitButton").disabled = true;
+    document.getElementById("standButton").disabled = true;
+    document.getElementById("newGameButton").disabled = false;
+
 
 
     //FOOTER WITH GAME STATUS
@@ -430,6 +434,9 @@ function BlackJack(mainContainerElement) {
   self.updateDOMScore = function() {
     if ((self.playerSum < 20) && (self.dealerSumStand < self.playerSum)) {
       self.scoreInfo.innerText = "You have " + self.playerSum + ". Hit or Stand?";
+      document.getElementById("hitButton").disabled = false;
+      document.getElementById("standButton").disabled = false;
+      document.getElementById("newGameButton").disabled = true;
     }
     else if(self.playerSum === 21) {
       self.scoreInfo.innerText = "You have " + self.playerSum +". Dealer has "+self.dealerSum+". BLACKJACK! You win!";
